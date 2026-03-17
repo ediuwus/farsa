@@ -3,68 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Security Alert</title>
+    <title>Sistem Compromis!</title>
     <style>
-        body { background-color: white; color: black; font-family: Arial, sans-serif; text-align: center; padding-top: 50px; transition: background 0.2s; overflow: hidden; }
-        .warning-box { border: 1px solid #dadce0; border-radius: 8px; padding: 20px; display: inline-block; max-width: 90%; }
-        .danger { background-color: #ff0000; color: white; font-weight: bold; }
-        #hacker-screen { display: none; background-color: black; color: #0f0; font-family: 'Courier New', monospace; position: fixed; top: 0; left: 0; width: 100%; height: 100%; padding: 20px; text-align: left; box-sizing: border-box; }
-        .blink { animation: blinker 0.1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        body { background-color: black; color: #0f0; font-family: 'Courier New', monospace; margin: 0; padding: 20px; overflow: hidden; }
+        .alert { color: red; font-weight: bold; font-size: 24px; text-align: center; border: 2px solid red; padding: 10px; animation: blink 0.2s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+        .console { margin-top: 20px; font-size: 14px; line-height: 1.5; }
+        .ip-box { border: 1px solid #0f0; padding: 15px; margin-top: 20px; background: rgba(0,255,0,0.1); border-radius: 5px; }
+        .data-label { color: white; font-weight: bold; }
+        .data-value { color: #ffff00; }
     </style>
 </head>
 <body>
+    <div class="alert">ALERTA DE SECURITATE: ACCES ILEGAL</div>
+    
+    <div class="console">
+        <p>> Conexiune securiz
 
-    <div id="google-alert" class="warning-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png" width="100"><br><br>
-        <h2 style="color: #d93025;">Activitate suspectă detectată</h2>
-        <p>Am detectat o încercare de conectare neobișnuită din <b>Moscova, Rusia</b>.</p>
-        <p>Dispozitivul tău este acum în <b>MODUL DE SIGURANȚĂ</b>.</p>
-        <p id="timer">Analiză sistem în curs: 5s...</p>
-    </div>
-
-    <div id="hacker-screen">
-        <h1 class="blink" style="color: red;">SISTEM COMPROMIS!</h1>
-        <p>> Initializing brute_force_attack...</p>
-        <p>> Bypassing firewall...</p>
-        <p>> STATUS: <span style="color: white;">CONNECTED</span></p>
-        <p>> TARGET_NAME: <span style="color: yellow;">PRIETENUL TAU</span></p>
-        <p>> DOWNLOADING PRIVATE_GALLERY... [##########] 100%</p>
-        <p>> SENDING DATA TO SERVER... [DONE]</p>
-        <br>
-        <p style="color: white; border: 1px solid white; padding: 10px;">
-            IP-UL TĂU: <span id="user-ip">Se încarcă...</span><br>
-            LOCAȚIE: <span id="user-loc">Detectare prin GPS...</span>
-        </p>
-        <h2 class="blink" style="color: red; text-align: center;">TOATE DATELE AU FOST EXTRĂSE.</h2>
-    </div>
-
-    <script>
-        // Sunet de alertă (opțional, unele browsere îl blochează)
-        let count = 5;
-        let countdown = setInterval(function() {
-            count--;
-            document.getElementById("timer").innerHTML = "Analiză sistem în curs: " + count + "s...";
-            if (count <= 0) {
-                clearInterval(countdown);
-                startHackerPhase();
-            }
-        }, 1000);
-
-        function startHackerPhase() {
-            document.getElementById("google-alert").style.display = "none";
-            document.getElementById("hacker-screen").style.display = "block";
-            document.body.style.backgroundColor = "black";
-            if (navigator.vibrate) navigator.vibrate([500, 200, 500, 200, 500]);
-            
-            fetch('https://ipapi.co/json/')
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById("user-ip").innerText = data.ip;
-                    document.getElementById("user-loc").innerText = data.city + ", " + data.country_name;
-                });
-        }
-    </script>
-</body>
-</html>
 
