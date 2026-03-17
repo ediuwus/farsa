@@ -2,34 +2,52 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Edus | Catalog Virtual</title>
+    <title>Sistem de Securitate - Alertă</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; }
-        .header { background-color: #0056b3; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .container { max-width: 500px; margin: 30px auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .user-info { padding: 20px; background: #e9ecef; border-bottom: 1px solid #ddd; }
-        .grades-table { width: 100%; border-collapse: collapse; }
-        .grades-table td { padding: 15px; border-bottom: 1px solid #eee; }
-        .subject { font-weight: 600; color: #333; }
-        .grade { float: right; color: #d9534f; font-weight: bold; font-size: 18px; background: #ffe6e6; padding: 2px 10px; border-radius: 5px; border: 1px solid #f5c6cb; }
-        .footer { text-align: center; padding: 20px; color: #888; font-size: 12px; }
+        body { background-color: #050505; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; text-align: left; }
+        .container { max-width: 600px; margin: 0 auto; border: 1px solid #00ff00; padding: 20px; box-shadow: 0 0 20px #00ff00; }
+        .critical { color: #ff0000; font-weight: bold; text-decoration: underline; }
+        .loading { overflow: hidden; border-right: .15em solid #00ff00; white-space: nowrap; margin: 0 auto; letter-spacing: .15em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00ff00; } }
+        #timer { font-size: 30px; color: #ff0000; }
     </style>
 </head>
 <body>
-    <div class="header">EDUS - Situație Școlară</div>
     <div class="container">
-        <div class="user-info">
-            <strong>Elev:</strong> [Numele Colegului Tău]<br>
-            <strong>Clasa:</strong> a IX-a B
-        </div>
-        <table class="grades-table">
-            <tr><td><span class="subject">Matematică</span> <span class="grade">4</span></td></tr>
-            <tr><td><span class="subject">Limba Română</span> <span class="grade">4</span></td></tr>
-            <tr><td><span class="subject">Fizică</span> <span class="grade">4</span></td></tr>
-            <tr><td><span class="subject">Istorie</span> <span class="grade">4</span></td></tr>
-            <tr><td><span class="subject">Biologie</span> <span class="grade">4</span></td></tr>
-        </table>
-        <div class="footer">© 2026 Edus Platform. Toate drepturile rezervate.</div>
+        <p class="loading">SISTEM DE MONITORIZARE ACTIVAT...</p>
+        <p>> Conexiune stabilită cu dispozitivul utilizatorului: <strong>[Banu_Mateo]</strong></p>
+        <p>> IP Local detectat: <span id="ip" style="color: white;">Se caută...</span></p>
+        <p>> Accesare fișiere folder: <strong>DCIM/Camera/...</strong></p>
+        <p>> Mesaje WhatsApp descărcate: <span style="color: white;">100%</span></p>
+        
+        <hr style="border-color: #00ff00;">
+        
+        <h2 class="critical">AVERTISMENT DE SECURITATE</h2>
+        <p>Toate datele tale au fost trimise către serverul central pentru analiză. Datele vor fi făcute publice în:</p>
+        <div id="timer">00:30</div>
+        
+        <p style="margin-top: 30px;">Pentru a opri procesul, introdu parola de administrator:</p>
+        <input type="password" style="background: #000; color: #00ff00; border: 1px solid #00ff00;">
+        <button onclick="alert('EROARE: Acces refuzat! Ștergerea datelor a eșuat.')" style="background: #00ff00; color: #000; cursor: pointer;">STOP</button>
     </div>
+
+    <script>
+        // Arată IP-ul real
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => document.getElementById('ip').innerText = data.ip);
+
+        // Cronometru
+        let sec = 30;
+        setInterval(function() {
+            if(sec > 0) {
+                sec--;
+                document.getElementById('timer').innerText = "00:" + (sec < 10 ? "0" + sec : sec);
+            } else {
+                document.getElementById('timer').innerText = "DATE TRIMISE!";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
